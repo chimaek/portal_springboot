@@ -1,6 +1,6 @@
 HELP.md
-#.gradle
-#/build/
+.gradle
+/build/
 #!gradle/wrapper/gradle-wrapper.jar
 src/main/resources/application.properties
 
@@ -52,3 +52,5 @@ build/tmp/compileJava/ 제거할 예정
 build/tmp/compileTestJava/ 제거할 예정
 src/main/resources/static/ 제거할 예정
 src/main/resources/templates/ 제거할 예정
+
+build/
