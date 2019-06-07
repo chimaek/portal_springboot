@@ -1,8 +1,7 @@
 HELP.md
 .gradle
 /build/
-#!gradle/wrapper/gradle-wrapper.jar
-src/main/resources/application.properties
+!gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -29,28 +28,3 @@ src/main/resources/application.properties
 
 ### VS Code ###
 .vscode/
-.gitignore 제거할 예정
-build.gradle 제거할 예정
-gradle/ 제거할 예정
-gradlew 제거할 예정
-gradlew.bat 제거할 예정
-settings.gradle 제거할 예정
-src/ 제거할 예정
-.gradle/ 제거할 예정
-build/ 제거할 예정
-.gradle/5.4.1/fileHashes/resourceHashesCache.bin 제거할 예정
-.gradle/5.4.1/javaCompile/classAnalysis.bin 제거할 예정
-.gradle/5.4.1/javaCompile/jarAnalysis.bin 제거할 예정
-.gradle/5.4.1/vcsMetadata-1/ 제거할 예정
-build/classes/java/test/ 제거할 예정
-build/generated/ 제거할 예정
-build/reports/ 제거할 예정
-build/resources/main/static/ 제거할 예정
-build/resources/main/templates/ 제거할 예정
-build/test-results/ 제거할 예정
-build/tmp/compileJava/ 제거할 예정
-build/tmp/compileTestJava/ 제거할 예정
-src/main/resources/static/ 제거할 예정
-src/main/resources/templates/ 제거할 예정
-
-build/

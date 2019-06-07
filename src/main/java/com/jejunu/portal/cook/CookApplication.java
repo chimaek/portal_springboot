@@ -1,13 +1,13 @@
-package com.jejunu.portal.cooking;
+package com.jejunu.portal.cook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CookingApplication {
+public class CookApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CookingApplication.class, args);
+        SpringApplication.run(CookApplication.class, args);
     }
 
 }

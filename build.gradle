@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.1.5.RELEASE'
     id 'java'
-    id 'war'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -11,6 +10,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '12'
 
 configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -21,16 +24,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'mysql:mysql-connector-java'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'net.sourcefoge.nekohtml:nekohtml:1.9.22'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
