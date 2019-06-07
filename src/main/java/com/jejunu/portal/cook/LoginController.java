@@ -28,7 +28,7 @@ public class LoginController {
 
     // 가입화면 컨트롤러
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView register() {
+    public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
@@ -38,7 +38,7 @@ public class LoginController {
 
     // 유저 생성
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         //기존에 있던 유저가 있는지?
         User userExists = userService.findUserByEmail(user.getEmail());
