@@ -1,4 +1,4 @@
-package com.jejunu.portal.jmt;
+package com.jejunu.portal.jmt.DB;
 
 
 import lombok.*;
@@ -6,11 +6,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
-@EqualsAndHashCode(of = "uid")
 public class Member {
 
     @Id
@@ -26,11 +26,12 @@ public class Member {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "uid")
-    private List<UserRole> roles;
-
+    @Builder
+    public Member(String uid, String password,String username) {
+        this.uid = uid;
+        this.password = password;
+        this.username=username;
+    }
 }
-
 
 

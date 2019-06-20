@@ -1,37 +1,31 @@
 package com.jejunu.portal.jmt.Controller;
 
 
-import com.jejunu.portal.jmt.Member;
-import com.jejunu.portal.jmt.MemberRepo;
+import com.jejunu.portal.jmt.DB.Member;
+import com.jejunu.portal.jmt.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "/members")
 public class MemberController {
-    private MemberRepo memberRepo;
+
+    private final MemberService memberService;
 
     @Autowired
-    public MemberController(MemberRepo memberRepo) {
-        this.memberRepo = memberRepo;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
-
     //생성
-    @PostMapping
-    public Member create(@RequestParam String uid) {
-        return memberRepo.save(new Member(uid));
+    @PostMapping("/create")
+    public Member create(@RequestParam(required = false) String uid, String password ,String username) {
+        return memberService.join(uid,password,username);
     }
 
-    //모든 사용자 검색
-    @GetMapping
-    public Iterable<Member> list() {
-        return memberRepo.findAll();
-    }
-
-    @GetMapping(value = "/{uid}")
-    public Optional<Member> findOne(@PathVariable Long uid) {
-        return memberRepo.findById(uid);
-    }
+   @GetMapping(value = "/me")
+    public Member getme(@RequestHeader String auth){
+        return memberService.auth(auth);
+   }
 
 }

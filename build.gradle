@@ -32,6 +32,5 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation'javax.xml.bind:jaxb-api:2.3.0'
-    implementation'org.springframework.boot:spring-boot-starter-security'
 
 }
