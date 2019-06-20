@@ -32,6 +32,10 @@ public class Member {
         this.password = password;
         this.username=username;
     }
+    @Builder
+    public Member(String uid){
+        this.uid=uid;
+    }
 }
 
 

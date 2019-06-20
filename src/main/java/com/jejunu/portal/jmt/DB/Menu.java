@@ -1,10 +1,7 @@
 package com.jejunu.portal.jmt.DB;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -28,5 +25,14 @@ public class Menu {
     @Column(length = 255)
     Long price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member writer;
+
+    @Builder
+    public  Menu(String menuname,Member writer){
+        this.menuname = menuname;
+        this.writer = writer;
+    }
 
 }
