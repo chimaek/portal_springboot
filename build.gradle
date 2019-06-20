@@ -34,5 +34,6 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.webjars:bootstrap:3.3.5'
+    implementation 'io.github.jpenren:thymeleaf-spring-data-dialect:2.1.1'
     
 }

@@ -21,6 +21,8 @@ public class MemberServiceImpl implements MemberService {
         return memberRepo.save(new Member(username,uid, password));
     }
 
+
+
     @Override
     public Member auth(String token) {
         String[] split = token.split(" ");

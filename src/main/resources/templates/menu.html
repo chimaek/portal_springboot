@@ -19,6 +19,7 @@
         <th>가격</th>
     </tr>
     <tr th:each="i: ${#numbers.sequence(1, 10)}">
+        <td th:text="${}"
         <td th:text="${i}"></td>
         <td th:text="글쓴이 + ${i}"></td>
         <td th:text="제목 + ${i}"></td>

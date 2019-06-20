@@ -4,8 +4,10 @@ import com.jejunu.portal.jmt.DB.Menu;
 import com.jejunu.portal.jmt.Repository.MenuRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +15,14 @@ import java.util.Optional;
 @RequestMapping("/menu")
 public class MenuController {
     @Autowired
-    private MenuRepo menuRepo;
+    private final MenuRepo menuRepo;
+
+    public MenuController(MenuRepo menuRepo) {
+        this.menuRepo = menuRepo;
+    }
 
     @GetMapping("/")
-    public String menuView(){
+    public String menuView(Model model , Pageable pageable){
         return "menu";
     }
 
