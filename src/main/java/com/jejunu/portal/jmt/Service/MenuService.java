@@ -2,14 +2,20 @@ package com.jejunu.portal.jmt.Service;
 
 import com.jejunu.portal.jmt.DB.Menu;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 public interface MenuService {
 
-    Menu create(String menuname, String explain, Long price);
+    public void create(Menu menu) throws  Exception;
 
-    Menu delete(String menumame);
+    public Menu read(Long bno) throws  Exception;
 
-    Menu read(String menuname, String explain, Long price);
+    public void update(Menu menu)throws Exception;
 
-    Menu update(String menuname,String explain, Long price);
+    public void delete(Long bno) throws  Exception;
 
+    public List<Menu> list() throws Exception;
+
+    public void increaseViewcnt(Long bno , HttpSession httpSession) throws Exception;
 }

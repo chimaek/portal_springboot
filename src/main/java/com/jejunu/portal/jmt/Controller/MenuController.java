@@ -2,10 +2,13 @@ package com.jejunu.portal.jmt.Controller;
 
 import com.jejunu.portal.jmt.DB.Menu;
 import com.jejunu.portal.jmt.Repository.MenuRepo;
+import com.jejunu.portal.jmt.Service.MemberService;
+import com.jejunu.portal.jmt.Service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.print.Pageable;
 import java.util.List;
@@ -15,46 +18,27 @@ import java.util.Optional;
 @RequestMapping("/menu")
 public class MenuController {
     @Autowired
-    private final MenuRepo menuRepo;
+    private MenuService menuService;
 
-    public MenuController(MenuRepo menuRepo) {
-        this.menuRepo = menuRepo;
+    @Autowired
+    public MenuController(MenuService menuService) {
+        this.menuService = menuService;
     }
 
-    @GetMapping("/")
-    public String menuView(Model model , Pageable pageable){
-        return "menu";
+    @GetMapping("/list")
+    public ModelAndView list() throws Exception {
+        List<Menu> list = menuService.list();
+        return new ModelAndView("menu", "list", list);
     }
 
-    @PostMapping("/add")
-    public Menu add(Menu menu){
-        Menu menu1 =menuRepo.save(menu);
-        return menu1;
+    @RequestMapping(value = "/post", method = RequestMethod.GET)
+    public ModelAndView writeForm() throws Exception {
+        return new ModelAndView("menuWrite");
     }
 
-    @GetMapping("/view/{id}")
-    public Optional<Menu> view(@PathVariable Long id){
-        Optional<Menu> menu=menuRepo.findById(id);
-        return menu;
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    public String write(@ModelAttribute("menu") Menu menu) throws Exception {
+        menuService.create(menu);
+        return "redirect://localhost:8080/menu";
     }
-
-    @RequestMapping("/list")
-    public List<Menu> list(){
-        List<Menu> menus = menuRepo.findAll();
-        return menus;
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id){
-        System.out.println("id는 : "+id );
-        menuRepo.deleteById(id);
-        return "redirect:/member/list";
-    }
-
-    @PutMapping("/edit/{id}")
-    public Menu edit(Menu menu){
-        Menu menu1 =menuRepo.save(menu);
-        return menu1;
-    }
-
 }
