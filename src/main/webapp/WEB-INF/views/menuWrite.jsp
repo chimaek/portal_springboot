@@ -21,18 +21,18 @@
 <body>
 <h3>음식 정보 작성</h3>
 <div style="padding : 30px;">
-    <form method="POST" action="/menu/post">
+    <form method="POST" action="/menu/post/${bno}">
         <div class="form-group">
             <label>음식 이름</label>
-            <input type="text" name="menuname" class="form-control">
+            <input type="text" name="menuname" class="form-control" value=${menu.menuname}>
         </div>
         <div class="form-group">
             <label>가격</label>
-            <input type="text" name="price" class="form-control">
+            <input type="text" name="price" class="form-control" value=${menu.price}>
         </div>
         <div class="form-group">
             <label>내용</label>
-            <textarea name="content" class="form-control" rows="5"></textarea>
+            <textarea name="content" class="form-control" rows="5">${menu.content   }</textarea>
         </div>
         <button type="submit" class="btn btn-default">작성</button>
     </form>

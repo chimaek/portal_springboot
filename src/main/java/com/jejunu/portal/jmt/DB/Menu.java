@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@ToString
+@Getter
+@Setter
 public class Menu {
 
     @Id
@@ -25,10 +25,4 @@ public class Menu {
 
     @Column(length = 255)
     private String content;
-
-    public Menu(String menuname, Long price, String content) {
-        this.menuname = menuname;
-        this.price = price;
-        this.content = content;
-    }
 }

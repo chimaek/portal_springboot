@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
         if (member != null) {
             throw new AlreadyExistsException("Duplicate username");
         }
-        return memberRepo.save(new Member(uid, username, password));
+        return memberRepo.save(Member.builder().uid(uid).username(username).password(password).build());
     }
 
     @Override

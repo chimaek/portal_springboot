@@ -19,7 +19,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu create(String menuname, Long price, String content) throws Exception {
-        Menu menu1 = new Menu(menuname, price, content);
+        Menu menu1 = Menu.builder().menuname(menuname).price(price).content(content).build();
         return menuRepo.save(menu1);
     }
 

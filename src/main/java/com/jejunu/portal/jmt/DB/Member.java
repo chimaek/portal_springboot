@@ -6,10 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 public class Member {
 
@@ -25,13 +25,6 @@ public class Member {
 
     @Column(nullable = false, length = 255)
     private String password;
-
-    @Builder
-    public Member(String uid, String username, String password) {
-        this.uid = uid;
-        this.username = username;
-        this.password = password;
-    }
 
 
 }

@@ -19,7 +19,8 @@ import java.util.Optional;
 public class MenuController {
     @Autowired
     private MenuService menuService;
-
+    @Autowired
+    private MenuRepo menuRepo;
     @Autowired
     public MenuController(MenuService menuService) {
         this.menuService = menuService;
@@ -31,6 +32,24 @@ public class MenuController {
         return new ModelAndView("menu", "list", list);
     }
 
+    @GetMapping("/post/{id}")
+    public ModelAndView getbno(@PathVariable Long id) throws Exception {
+        Menu menu = menuService.read(id);
+        return new ModelAndView("menuWrite") {{
+            addObject("menu", menu);
+            addObject("bno", id);
+        }};
+    }
+    @PostMapping("/post/{id}")
+    public String updatebno(@PathVariable Long id, @RequestParam String menuname, @RequestParam Long price, @RequestParam String content) throws Exception {
+        Menu menu = menuRepo.findById(id).orElseThrow(Exception::new);
+        menu.setMenuname(menuname);
+        menu.setContent(content);
+        menu.setPrice(price);
+        System.out.println("뭐");
+        menuRepo.save(menu);
+        return "redirect:/menu";
+    }
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public ModelAndView writeForm() throws Exception {
         return new ModelAndView("menuWrite");
@@ -38,7 +57,8 @@ public class MenuController {
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public String write(@ModelAttribute("menu") @RequestParam String menuname, Long price, String content) throws Exception {
-        menuService.create(menuname, price, content);
+//        menuService.create(menuname, price, content);
+        menuRepo.save(Menu.builder().menuname(menuname).content(content).price(price).build());
         return "redirect://localhost:8080/menu";
     }
 
