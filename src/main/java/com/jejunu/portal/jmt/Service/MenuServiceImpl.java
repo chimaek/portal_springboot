@@ -10,18 +10,31 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class MenuServiceImpl {
+public class MenuServiceImpl implements MenuService{
     private final MenuRepo menuRepo;
 
     public MenuServiceImpl(MenuRepo menuRepo) {
         this.menuRepo = menuRepo;
     }
 
-    public Menu createMenu(Menu menu) {
-        return menuRepo.save(menu);
+
+    @Override
+    public Menu create(String menuname, String explain, Long price) {
+        return null;
     }
 
+    @Override
+    public Menu delete(String menumame) {
+        return null;
+    }
 
+    @Override
+    public Menu read(String menuname, String explain, Long price) {
+        return null;
+    }
+
+    @Override
+    public Menu update(String menuname, String explain, Long price) {
+        return null;
+    }
 }

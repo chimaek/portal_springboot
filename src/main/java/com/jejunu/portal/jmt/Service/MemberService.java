@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MemberService {
     //가입 하는 부분
-    Member join(String username, String uid, String password) throws Exception;
+    Member join(String uid, String username, String password);
     // 인증
     Member auth(String token) throws authorizedException;
     // 리스트 가져오기

@@ -4,7 +4,6 @@ package com.jejunu.portal.jmt.DB;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Builder
 @Data
@@ -27,16 +26,13 @@ public class Member {
     @Column(nullable = false, length = 255)
     private String password;
 
-
-    public Member(String username, String uid, String password) {
-        this.uid = this.uid;
-        this.password = this.password;
-        this.username = this.username;
-    }
-
-    public Member(String uid) {
+    @Builder
+    public Member(String uid, String username, String password) {
         this.uid = uid;
+        this.username = username;
+        this.password = password;
     }
+
 
 }
 

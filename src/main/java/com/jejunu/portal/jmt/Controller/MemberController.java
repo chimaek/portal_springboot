@@ -23,20 +23,21 @@ public class MemberController {
 
     //생성
     @PostMapping("/create")
-    public Member create(@RequestParam String uid, String password, String username) throws Exception {
-        return memberService.join(uid, password, username);
+    public Member create(@RequestParam String uid, String username, String password) {
+        return memberService.join(uid, username, password);
     }
+
     //리스트
     @GetMapping(value = "/list")
-    public List<Member> list(){
+    public List<Member> list() {
         List<Member> memberList = memberService.MEMBER_LIST();
         return memberList;
     }
 
     //본인의 정보 반환
     @GetMapping(value = "/me")
-    public Member GetMe(@RequestHeader String Author) throws authorizedException {
-        return memberService.auth(Author);
+    public Member GetMe(@RequestHeader String author) throws authorizedException {
+        return memberService.auth(author);
     }
 
 

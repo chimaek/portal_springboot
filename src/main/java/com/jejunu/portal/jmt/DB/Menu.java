@@ -7,12 +7,10 @@ import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 @ToString
 public class Menu {
 
-    private final String menuName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,16 +28,8 @@ public class Menu {
     @JoinColumn(name = "MEMBER_ID")
     private Member writer;
 
-    @Builder
-    public Menu(String menuName, String menuname, Member writer) {
-        this.menuName = menuName;
+    public Menu(String menuname, String explain, Long price) {
         this.menuname = menuname;
-        this.writer = writer;
-    }
-
-    public Menu(String menuName, String explain, Long price) {
-
-        this.menuName = menuName;
         this.explain = explain;
         this.price = price;
     }

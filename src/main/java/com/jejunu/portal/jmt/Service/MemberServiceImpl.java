@@ -21,12 +21,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member join(String username, String uid, String password) {
-        Member member = new Member(username, uid, password);
+    public Member join(String uid, String username, String password) {
+        Member member = memberRepo.findByUid(uid);
         if (member != null) {
             throw new AlreadyExistsException("Duplicate username");
         }
-        return memberRepo.save(member);
+        return memberRepo.save(new Member(uid, username, password));
     }
 
     @Override
