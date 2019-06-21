@@ -2,9 +2,13 @@ package com.jejunu.portal.jmt.Service;
 
 import com.jejunu.portal.jmt.DB.Member;
 import com.jejunu.portal.jmt.Repository.MemberRepo;
+import com.jejunu.portal.jmt.exception.AlreadyExistsException;
+import com.jejunu.portal.jmt.exception.authorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
+
+import java.util.List;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -18,23 +22,57 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member join(String username, String uid, String password) {
-        return memberRepo.save(new Member(username,uid, password));
+        Member member = new Member(username, uid, password);
+        if (member != null) {
+            throw new AlreadyExistsException("Duplicate username");
+        }
+        return memberRepo.save(member);
+    }
+
+    @Override
+    public Member auth(String token) throws authorizedException {
+        try {
+            String[] split = token.split(" ");
+            String type = split[0];
+            String credential = split[1];
+
+            if ("Basic".equalsIgnoreCase(type)) {
+                String decoded = new String(Base64Utils.decodeFromString(credential));
+                String[] usernameAndPassword = decoded.split(":");
+
+                Member member = memberRepo.findByUidAndPassword(usernameAndPassword[0], usernameAndPassword[1]);
+                if (member == null) {
+                    throw new authorizedException("Invalid credentials");
+                } else {
+                    return member;
+                }
+            } else {
+                throw new authorizedException("Unsupported type: " + type);
+            }
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) {
+            throw new authorizedException("Invalid credentials");
+        }
+    }
+
+    @Override
+    public List<Member> MEMBER_LIST() {
+        return memberRepo.findAll();
+    }
+
+    @Override
+    public boolean exists(String token) {
+        try {
+            Member member = auth(token);
+            if (member != null) return true;
+        } catch (authorizedException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
-
     @Override
-    public Member auth(String token) {
-        String[] split = token.split(" ");
-        String type = split[0];
-        String credential = split[1];
-
-        Member member = null;
-        if ("Basic".equalsIgnoreCase(type)) {
-            String decoded = new String(Base64Utils.decodeFromString(credential));
-            String[] uidAndPassword = decoded.split(":");
-            member = memberRepo.findByUidAndPassword(uidAndPassword[0], uidAndPassword[1]);
-        }
-        return member;
+    public Member findByid(Long id) {
+        return memberRepo.findById(id).get();
     }
 }

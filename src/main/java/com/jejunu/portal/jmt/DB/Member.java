@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,16 +27,17 @@ public class Member {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Builder
-    public Member(String uid, String password,String username) {
+
+    public Member(String username, String uid, String password) {
+        this.uid = this.uid;
+        this.password = this.password;
+        this.username = this.username;
+    }
+
+    public Member(String uid) {
         this.uid = uid;
-        this.password = password;
-        this.username=username;
     }
-    @Builder
-    public Member(String uid){
-        this.uid=uid;
-    }
+
 }
 
 
