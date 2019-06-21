@@ -68,4 +68,9 @@ public class MenuController {
         return new ModelAndView("menuView","menu",menu);
     }
 
+    @RequestMapping(value = "/post/{bno}",method = RequestMethod.DELETE)
+    public String delete(@PathVariable("bno")Long bno)throws Exception{
+        menuService.delete(bno);
+        return "redirect:/menu";
+    }
 }

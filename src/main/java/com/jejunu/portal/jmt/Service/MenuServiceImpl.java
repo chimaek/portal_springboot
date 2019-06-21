@@ -35,7 +35,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void delete(Long bno) throws Exception {
-
+        menuRepo.deleteById(bno);
     }
 
     @Override
