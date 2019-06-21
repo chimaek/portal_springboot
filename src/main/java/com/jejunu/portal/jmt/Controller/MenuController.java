@@ -25,7 +25,7 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public ModelAndView list() throws Exception {
         List<Menu> list = menuService.list();
         return new ModelAndView("menu", "list", list);
@@ -37,8 +37,8 @@ public class MenuController {
     }
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public String write(@ModelAttribute("menu") Menu menu) throws Exception {
-        menuService.create(menu);
+    public String write(@ModelAttribute("menu") @RequestParam String menuname, Long price, String content) throws Exception {
+        menuService.create(menuname, price, content);
         return "redirect://localhost:8080/menu";
     }
 }

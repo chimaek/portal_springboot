@@ -24,10 +24,9 @@
 <table class="table">
     <tr>
         <th>No</th>
-        <th>제목</th>
+        <th>이름</th>
         <th>가격</th>
         <th>내용</th>
-        <th>조회수</th>
     </tr>
     <c:forEach var="menu" items="${list}">
         <tr>
@@ -35,7 +34,6 @@
             <td><a href="/menu/${menu.bno}">${menu.menuname}</a></td>
             <td>&#8361 ${menu.price}</td>
             <td>${menu.content}</td>
-            <td>${menu.viewnumber}</td>
         </tr>
     </c:forEach>
 </table>

@@ -4,6 +4,7 @@ package com.jejunu.portal.jmt.DB;
 import lombok.*;
 
 import javax.persistence.*;
+
 @Builder
 @Entity
 @AllArgsConstructor
@@ -25,7 +26,9 @@ public class Menu {
     @Column(length = 255)
     private String content;
 
-    @Column(length = 255)
-    private Long viewnumber;
-
+    public Menu(String menuname, Long price, String content) {
+        this.menuname = menuname;
+        this.price = price;
+        this.content = content;
+    }
 }
