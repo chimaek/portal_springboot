@@ -41,4 +41,11 @@ public class MenuController {
         menuService.create(menuname, price, content);
         return "redirect://localhost:8080/menu";
     }
+
+    @RequestMapping(value = "/{bno}",method = RequestMethod.GET)
+    public ModelAndView view(@PathVariable("bno") Long bno)throws Exception{
+        Menu menu = menuService.read(bno);
+        return new ModelAndView("menuView","menu",menu);
+    }
+
 }
